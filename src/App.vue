@@ -18,4 +18,8 @@ export default {};
 li {
   list-style-type: none;
 }
+
+.error {
+  color: #dc3545;
+}
 </style>

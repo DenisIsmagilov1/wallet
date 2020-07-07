@@ -2,11 +2,11 @@
   <div class="category-item">
     <h2>{{item.title}}</h2>
     <span>{{item.current}}</span>
-    <form class="category-item__form" action>
+    <form @submit.prevent="onSubmit" class="category-item__form" action>
       <input type="text" v-model="value" />
-      <span v-if="($v.value.$dirty && !$v.value.required)" class="category-item__error">Пустое поле</span>
-      <span v-if="($v.value.$dirty && !$v.value.numeric)" class="category-item__error">Введите число</span>
-      <b-button @click.prevent="onSubmit" type="submit" variant="outline-success">Потрачено</b-button>
+      <span v-if="($v.value.$dirty && !$v.value.required)" class="error">Пустое поле</span>
+      <span v-if="($v.value.$dirty && !$v.value.numeric)" class="error">Введите число</span>
+      <b-button type="submit" variant="outline-success">Потрачено</b-button>
     </form>
   </div>
 </template>
@@ -61,9 +61,5 @@ export default {
 
 .category-item__form button {
   margin: 10px 0 0 0;
-}
-
-.category-item__error {
-  color: #dc3545;
 }
 </style>

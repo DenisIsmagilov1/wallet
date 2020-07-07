@@ -12,21 +12,29 @@ export default {
       ];
 
       ctx.commit('updateCategories', newCategories);
+    },
+    addNewCategory(ctx, title) {
+      const newCategory = {
+        id: Date.now(), title, current: 0
+      }
+
+      ctx.commit('addCategory', newCategory);
     }
   },
   mutations: {
     updateCategories(state, categories) {
       state.categories = categories;
+    },
+    addCategory(state, category) {
+      state.categories.push(category)
     }
   },
   state: {
     budget: 24000,
     categories: [
       { id: 1, title: "Здоровье", current: 1004 },
-      { id: 2, title: "Еда", current: 777 },
-      { id: 3, title: "Жилье", current: 2145 },
-      { id: 4, title: "Жилье", current: 245 },
-      { id: 5, title: "Жилье", current: 2145 }
+      { id: 2, title: "Продукты", current: 777 },
+      { id: 3, title: "Жилье", current: 2145 }
     ]
   },
   getters: {
