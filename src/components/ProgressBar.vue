@@ -1,24 +1,21 @@
 <template>
   <div class="progress-widget">
-    <span class="progress-widget__counter">{{this.current}} из {{this.max}}</span>
+    <span class="progress-widget__counter">{{getCurrent}} из {{getBudget}}</span>
     <b-progress height="20px" :variant="getColor" :value="getPercent" show-progress class="mb-2"></b-progress>
   </div>
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
-  data() {
-    return {
-      max: 20000,
-      current: 5225
-    };
-  },
   computed: {
+    ...mapGetters(["getBudget", "getCurrent"]),
     getPercent() {
-      return (this.current / this.max) * 100;
+      return (this.getCurrent / this.getBudget) * 100;
     },
     getColor() {
-      if (this.current < this.max) {
+      if (this.getCurrent < this.getBudget) {
         return "success";
       } else {
         return "danger";
