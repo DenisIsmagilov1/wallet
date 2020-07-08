@@ -23,6 +23,9 @@ export default {
   getters: {
     bills(state) {
       return state.bills
+    },
+    allBalance(state) {
+      return state.bills.reduce((summ, item) => summ += item.balance, 0)
     }
   }
 }

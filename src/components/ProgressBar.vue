@@ -1,6 +1,6 @@
 <template>
   <div class="progress-widget">
-    <span class="progress-widget__counter">{{getCurrent}} из {{getBudget}}</span>
+    <span class="progress-widget__counter">{{getCurrent}} из {{allBalance}}</span>
     <b-progress height="20px" :variant="getColor" :value="getPercent" show-progress class="mb-2"></b-progress>
   </div>
 </template>
@@ -10,12 +10,12 @@ import { mapGetters } from "vuex";
 
 export default {
   computed: {
-    ...mapGetters(["getBudget", "getCurrent"]),
+    ...mapGetters(["allBalance", "getCurrent"]),
     getPercent() {
-      return (this.getCurrent / this.getBudget) * 100;
+      return (this.getCurrent / this.allBalance) * 100;
     },
     getColor() {
-      if (this.getCurrent < this.getBudget) {
+      if (this.getCurrent < this.allBalance) {
         return "success";
       } else {
         return "danger";
