@@ -1,6 +1,16 @@
 export default {
-  actions: {},
-  mutations: {},
+  actions: {
+    newBill(ctx, { title, balance }) {
+      const newBill = { id: Date.now(), title, balance }
+
+      ctx.commit('addBill', newBill)
+    }
+  },
+  mutations: {
+    addBill(state, bill) {
+      state.bills.push(bill)
+    }
+  },
   state: {
     bills: [
       {

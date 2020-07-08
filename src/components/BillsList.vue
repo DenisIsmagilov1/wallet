@@ -1,5 +1,7 @@
 <template>
-  <b-table striped hover :items="getBills"></b-table>
+  <b-col cols="8" class="bills__table">
+    <b-table striped hover :items="getBills"></b-table>
+  </b-col>
 </template>
 
 <script>
