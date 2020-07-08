@@ -1,22 +1,21 @@
 <template>
   <MainLayout>
     <div slot="content">
-      <ProgressBar />
-      <CategoryManager />
+      <div class="bills">
+        <BillsList />
+      </div>
     </div>
   </MainLayout>
 </template>
 
 <script>
 import MainLayout from "../layouts/MainLayout";
-import ProgressBar from "../components/ProgressBar";
-import CategoryManager from "../components/CategoriesManager";
+import BillsList from "../components/BillsList";
 
 export default {
   components: {
     MainLayout,
-    ProgressBar,
-    CategoryManager
+    BillsList
   }
 };
 </script>
