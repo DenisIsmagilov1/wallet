@@ -1,9 +1,9 @@
 <template>
-  <div class="login">
-    <h3 class="header-form">Вход</h3>
-    <form @submit.prevent="onSubmit" class="login__form">
-      <label for="login">Логин</label>
-      <b-form-input :state="checkEmail" v-model="email" name="login" type="text" />
+  <div class="register">
+    <h1 class="header-form">Регистрация</h1>
+    <form @submit.prevent="onSubmit" class="register__form">
+      <label for="register">Логин</label>
+      <b-form-input :state="checkEmail" v-model="email" name="register" type="text" />
       <small v-if="($v.email.$dirty && !$v.email.required)" class="error">Введите email</small>
       <small v-if="($v.email.$dirty && !$v.email.email)" class="error">Введен не корректный email</small>
       <label for="password">Пароль</label>
@@ -13,25 +13,38 @@
         v-if="($v.password.$dirty && !$v.password.minLength)"
         class="error"
       >Пароль не должен быть менее 6 символов</small>
-      <b-button variant="success" class="login__form__submit" type="submit">Войти</b-button>
-      <router-link to="/register">Зарегистрироваться</router-link>
+      <label for="repeatPassword">Повторите пароль</label>
+      <b-form-input
+        :state="checkRepeatPassword"
+        v-model="repeatPassword"
+        name="repeatPassword"
+        type="password"
+      />
+      <small
+        v-if="($v.repeatPassword.$dirty && !$v.repeatPassword.sameAs)"
+        class="error"
+      >Пароли не совпадают</small>
+      <b-button variant="success" class="register__form__submit" type="submit">Регистрация</b-button>
+      <router-link to="/login">У вас уже есть аккаунт?</router-link>
     </form>
   </div>
 </template>
 
 <script>
-import { required, email, minLength } from "vuelidate/lib/validators";
+import { required, email, minLength, sameAs } from "vuelidate/lib/validators";
 
 export default {
   data() {
     return {
       email: "",
-      password: ""
+      password: "",
+      repeatPassword: ""
     };
   },
   validations: {
     email: { required, email },
-    password: { required, minLength: minLength(6) }
+    password: { required, minLength: minLength(6) },
+    repeatPassword: { sameAs: sameAs("password") }
   },
   computed: {
     checkEmail() {
@@ -46,6 +59,15 @@ export default {
     checkPassword() {
       if (this.$v.password.$dirty) {
         if (this.$v.password.minLength && this.$v.password.required) {
+          return true;
+        }
+        return false;
+      }
+      return null;
+    },
+    checkRepeatPassword() {
+      if (this.$v.repeatPassword.$dirty) {
+        if (this.$v.repeatPassword.sameAs) {
           return true;
         }
         return false;
@@ -66,14 +88,14 @@ export default {
 </script>
 
 <style scoped>
-.login {
+.register {
   background-color: #fff;
   border-radius: 10px;
   margin: 0 0 10% 0;
   width: 25%;
 }
 
-.login__form {
+.register__form {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -82,16 +104,16 @@ export default {
   padding: 20px;
 }
 
-.login__form label {
+.register__form label {
   align-self: start;
 }
 
-.login__form input {
+.register__form input {
   width: 100%;
   align-self: start;
 }
 
-.login__form__submit {
+.register__form__submit {
   margin: 20px 0 0 0;
 }
 </style>
