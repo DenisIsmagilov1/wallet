@@ -34,7 +34,13 @@ export default {
       { id: 4, type: "Расход", category: "Еда", value: 574 },
       { id: 5, type: "Расход", category: "Покупки", value: 10999 },
       { id: 6, type: "Доход", category: "Карта", value: 15000 },
-      { id: 7, type: "Расход", category: "Еда", value: 1020 }
+      { id: 7, type: "Расход", category: "Еда", value: 1020 },
+      { id: 8, type: "Расход", category: "Покупки", value: 10999 },
+      { id: 9, type: "Доход", category: "Карта", value: 15000 },
+      { id: 10, type: "Расход", category: "Еда", value: 1020 },
+      { id: 11, type: "Расход", category: "Покупки", value: 10999 },
+      { id: 12, type: "Доход", category: "Карта", value: 15000 },
+      { id: 13, type: "Расход", category: "Еда", value: 1020 }
     ]
   },
   getters: {
