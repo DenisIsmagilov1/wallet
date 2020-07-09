@@ -1,7 +1,7 @@
 <template>
   <b-col cols="8" class="bills__table">
     <b-table striped hover :items="getBills" :fields="fields">
-      <template v-slot:cell(index)="data">{{ data.index + 1 }}</template>
+      <template v-slot:cell(#)="data">{{ data.index + 1 }}</template>
     </b-table>
   </b-col>
 </template>
@@ -11,7 +11,7 @@ export default {
   data() {
     return {
       fields: [
-        "index",
+        "#",
         { key: "title", label: "Название" },
         { key: "balance", label: "Сумма" }
       ]

@@ -18,6 +18,7 @@
 
 <script>
 import { required, numeric } from "vuelidate/lib/validators";
+import { mapActions } from "vuex";
 
 export default {
   data() {
@@ -31,15 +32,21 @@ export default {
     balance: { required, numeric }
   },
   methods: {
+    ...mapActions(["newBill", "newProfitOperation"]),
     onSubmit() {
       if (this.$v.$invalid) {
         this.$v.$touch();
         return;
       }
 
-      this.$store.dispatch("newBill", {
+      this.newBill({
         title: this.title,
         balance: Number(this.balance)
+      });
+
+      this.newProfitOperation({
+        category: this.title,
+        value: Number(this.balance)
       });
 
       this.title = this.balance = "";

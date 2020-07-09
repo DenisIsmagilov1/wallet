@@ -26,7 +26,7 @@ export default {
     value: { numeric, required }
   },
   methods: {
-    ...mapActions(["addCategoriesCost"]),
+    ...mapActions(["addCategoriesCost", "newSpendOperation"]),
     onSubmit() {
       if (this.$v.$invalid) {
         this.$v.$touch();
@@ -34,6 +34,7 @@ export default {
       }
       const numValue = Number(this.value);
       this.addCategoriesCost({ id: this.item.id, value: numValue });
+      this.newSpendOperation({ category: this.item.title, value: numValue });
       this.value = "";
       this.$v.$reset();
     }
