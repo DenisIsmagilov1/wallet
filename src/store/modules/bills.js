@@ -19,6 +19,24 @@ export default {
       ];
 
       commit('updateBills', updatedBills);
+    },
+    deleteBill({ state, commit }, title) {
+      const billIndex = state.bills.findIndex((item) => item.title == title);
+
+      commit('deleteBill', billIndex);
+    },
+    deleteConfirm({ state, commit }, { title, value }) {
+      const billIndex = state.bills.findIndex((item) => item.title == title);
+      let updatedBill = state.bills[billIndex];
+      updatedBill.balance -= value;
+
+      const newBills = [
+        ...state.bills.slice(0, billIndex),
+        updatedBill,
+        ...state.bills.slice(billIndex + 1)
+      ];
+
+      commit('updateBills', newBills)
     }
   },
   mutations: {
@@ -27,6 +45,9 @@ export default {
     },
     updateBills(state, updatedBills) {
       state.bills = updatedBills;
+    },
+    deleteBill(state, index) {
+      state.bills.splice(index, 1);
     }
   },
   state: {

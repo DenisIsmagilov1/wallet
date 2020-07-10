@@ -19,6 +19,19 @@ export default {
       }
 
       ctx.commit('addCategory', newCategory);
+    },
+    deleteCost({ state, commit }, { title, value }) {
+      const categoryIndex = state.categories.findIndex((item) => item.title == title);
+      let updatedCategory = state.categories[categoryIndex];
+      updatedCategory.current -= value;
+
+      const newCategories = [
+        ...state.categories.slice(0, categoryIndex),
+        updatedCategory,
+        ...state.categories.slice(categoryIndex + 1)
+      ];
+
+      commit('updateCategories', newCategories)
     }
   },
   mutations: {
