@@ -19,6 +19,16 @@ export default {
       };
 
       ctx.commit('addOperation', newOperation);
+    },
+    newConfirmOperation(ctx, { category, value }) {
+      const newOperation = {
+        id: Date.now(),
+        type: 'Пополнение счета',
+        category,
+        value
+      };
+
+      ctx.commit('addOperation', newOperation);
     }
   },
   mutations: {
