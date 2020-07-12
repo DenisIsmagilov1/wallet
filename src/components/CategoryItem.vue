@@ -1,6 +1,7 @@
 <template>
   <div class="category-item">
     <h2>{{item.title}}</h2>
+    <span @click="deleteCategory(item.id)" class="category-item__close">X</span>
     <span>{{item.current}}</span>
     <form @submit.prevent="onSubmit" class="category-item__form" action>
       <input type="text" v-model="value" />
@@ -26,7 +27,7 @@ export default {
     value: { numeric, required }
   },
   methods: {
-    ...mapActions(["addCategoriesCost", "newSpendOperation"]),
+    ...mapActions(["addCategoriesCost", "newSpendOperation", "deleteCategory"]),
     onSubmit() {
       if (this.$v.$invalid) {
         this.$v.$touch();
@@ -45,11 +46,25 @@ export default {
 <style scoped>
 .category-item {
   display: flex;
+  position: relative;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   flex: 0 0 20%;
   padding: 20px;
+}
+
+.category-item__close {
+  color: red;
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: none;
+}
+
+.category-item:hover .category-item__close {
+  display: inline;
 }
 
 .category-item__form {

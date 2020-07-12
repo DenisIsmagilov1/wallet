@@ -20,6 +20,11 @@ export default {
 
       ctx.commit('addCategory', newCategory);
     },
+    deleteCategory({ state, commit }, id) {
+      const categoryIndex = state.categories.findIndex((item => item.id == id))
+
+      commit('deleteCategory', categoryIndex)
+    },
     deleteCost({ state, commit }, { title, value }) {
       const categoryIndex = state.categories.findIndex((item) => item.title == title);
       let updatedCategory = state.categories[categoryIndex];
@@ -40,6 +45,9 @@ export default {
     },
     addCategory(state, category) {
       state.categories.push(category)
+    },
+    deleteCategory(state, index) {
+      state.categories.splice(index, 1)
     }
   },
   state: {
