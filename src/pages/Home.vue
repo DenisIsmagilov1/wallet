@@ -1,8 +1,10 @@
 <template>
   <MainLayout>
     <div slot="content">
-      <ProgressBar />
-      <CategoryManager />
+      <div class="home">
+        <ProgressBar />
+        <CategoryManager />
+      </div>
     </div>
   </MainLayout>
 </template>

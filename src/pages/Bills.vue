@@ -1,10 +1,10 @@
 <template>
   <MainLayout>
     <div slot="content">
-      <b-row class="bills justify-content-center">
+      <div class="bills">
         <BillsList />
         <BillForm />
-      </b-row>
+      </div>
     </div>
   </MainLayout>
 </template>
@@ -22,3 +22,17 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.bills {
+  display: flex;
+  justify-content: center;
+}
+
+@media (max-width: 900px) {
+  .bills {
+    flex-direction: column-reverse;
+    align-items: center;
+  }
+}
+</style>

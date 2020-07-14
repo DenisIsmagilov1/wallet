@@ -1,5 +1,5 @@
 <template>
-  <b-col cols="3">
+  <div>
     <form @submit.prevent="onSubmit" class="bills__new-form" action>
       <h2>Новый счет</h2>
       <label for="title">Название</label>
@@ -13,7 +13,7 @@
 
       <b-button variant="outline-success" type="submit">Добавить</b-button>
     </form>
-  </b-col>
+  </div>
 </template>
 
 <script>
@@ -76,5 +76,11 @@ export default {
 
 .bills__new-form button {
   margin: 20px 0 0 0;
+}
+
+@media (max-width: 900px) {
+  .bills__new-form {
+    margin: 0 0 20px 0;
+  }
 }
 </style>

@@ -92,7 +92,7 @@ export default {
   background-color: #fff;
   border-radius: 10px;
   margin: 0 0 10% 0;
-  width: 25%;
+  width: 290px;
 }
 
 .register__form {
