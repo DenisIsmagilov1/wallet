@@ -5,6 +5,7 @@ import Login from './pages/Login'
 import Register from './pages/Register'
 import Bills from './pages/Bills'
 import Operations from './pages/Operations'
+import Statistics from './pages/Statistics'
 
 Vue.use(Router);
 
@@ -30,6 +31,10 @@ export default new Router({
     {
       path: '/operations',
       component: Operations
+    },
+    {
+      path: '/statistics',
+      component: Statistics
     }
   ]
 })
