@@ -34,4 +34,8 @@ export default {
 .bills__table__confirm-form {
   display: inline-flex;
 }
+
+.bills__table__confirm-form input {
+  width: 110px;
+}
 </style>

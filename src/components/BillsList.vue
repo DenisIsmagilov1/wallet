@@ -1,6 +1,6 @@
 <template>
   <div class="bills__table">
-    <b-table striped hover fixed :items="getBills" :fields="fields">
+    <b-table responsive="sm" striped hover :items="getBills" :fields="fields">
       <template v-slot:cell(#)="data">{{ data.index + 1 }}</template>
       <template v-slot:cell(Пополнить)="row">
         <BillConfirmForm :bill="row.item" />

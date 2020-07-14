@@ -10,7 +10,7 @@
       id="operations-table"
       striped
       hover
-      fixed
+      responsive="sm"
       :fields="fields"
       :items="$store.getters.getOperations"
       :per-page="perPage"
