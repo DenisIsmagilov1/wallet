@@ -19,10 +19,6 @@ li {
   list-style-type: none;
 }
 
-.error {
-  color: #dc3545;
-}
-
 .header-form {
   text-align: center;
   font-size: 28px;

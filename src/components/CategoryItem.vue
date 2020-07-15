@@ -5,8 +5,7 @@
     <span>{{item.current}}</span>
     <form @submit.prevent="onSubmit" class="category-item__form" action>
       <input type="text" v-model="value" />
-      <span v-if="($v.value.$dirty && !$v.value.required)" class="error">Пустое поле</span>
-      <span v-if="($v.value.$dirty && !$v.value.numeric)" class="error">Введите число</span>
+      <validationError :errorMessage="getErrorMessage" />
       <b-button type="submit" variant="outline-success">Потрачено</b-button>
     </form>
   </div>
@@ -15,6 +14,7 @@
 <script>
 import { mapActions } from "vuex";
 import { numeric, required } from "vuelidate/lib/validators";
+import validationError from "./validationError";
 
 export default {
   props: ["item"],
@@ -22,6 +22,9 @@ export default {
     return {
       value: ""
     };
+  },
+  components: {
+    validationError
   },
   validations: {
     value: { numeric, required }
@@ -39,6 +42,17 @@ export default {
       this.value = "";
       this.$v.$reset();
     }
+  },
+  computed: {
+    getErrorMessage() {
+      if (this.$v.value.$dirty && !this.$v.value.required) {
+        return "Пустое поле";
+      } else if (this.$v.value.$dirty && !this.$v.value.numeric) {
+        return "Введите число";
+      } else {
+        return "";
+      }
+    }
   }
 };
 </script>
@@ -51,6 +65,7 @@ export default {
   justify-content: center;
   align-items: center;
   flex: 0 0 20%;
+  height: 224px;
   padding: 20px;
 }
 

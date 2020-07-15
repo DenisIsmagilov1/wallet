@@ -4,10 +4,7 @@
     <form v-if="visibleForm" @submit.prevent="onSubmit" class="category-item-new__form" action>
       <label for="title">Название новой категории</label>
       <input name="title" type="text" v-model="categoryName" />
-      <span
-        v-if="($v.categoryName.$dirty && !$v.categoryName.required)"
-        class="error"
-      >Введите значение</span>
+      <validationError :errorMessage="getErrorMessage" />
       <b-button variant="outline-success" type="submit">Добавить</b-button>
     </form>
   </div>
@@ -17,6 +14,7 @@
 import { BIconPlusCircle } from "bootstrap-vue";
 import { mapActions } from "vuex";
 import { required } from "vuelidate/lib/validators";
+import validationError from "./validationError";
 
 export default {
   data() {
@@ -41,8 +39,18 @@ export default {
       this.$v.$reset();
     }
   },
+  computed: {
+    getErrorMessage() {
+      if (this.$v.categoryName.$dirty && !this.$v.categoryName.required) {
+        return "Введите значение";
+      } else {
+        return "";
+      }
+    }
+  },
   components: {
-    BIconPlusCircle
+    BIconPlusCircle,
+    validationError
   }
 };
 </script>
@@ -53,15 +61,17 @@ export default {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 208px;
+  height: 224px;
   flex: 0 0 222px;
   padding: 20px;
+  cursor: pointer;
 }
 
 .category-item-new__form {
+  flex: 0 0 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
 }
 

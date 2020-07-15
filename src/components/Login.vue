@@ -4,15 +4,12 @@
     <form @submit.prevent="onSubmit" class="login__form">
       <label for="login">Логин</label>
       <b-form-input :state="checkEmail" v-model="email" name="login" type="text" />
-      <small v-if="($v.email.$dirty && !$v.email.required)" class="error">Введите email</small>
-      <small v-if="($v.email.$dirty && !$v.email.email)" class="error">Введен не корректный email</small>
+      <validationError :errorMessage="getErrorMessageEmail" />
+
       <label for="password">Пароль</label>
       <b-form-input :state="checkPassword" v-model="password" name="password" type="password" />
-      <small v-if="($v.password.$dirty && !$v.password.required)" class="error">Введите пароль</small>
-      <small
-        v-if="($v.password.$dirty && !$v.password.minLength)"
-        class="error"
-      >Пароль не должен быть менее 6 символов</small>
+      <validationError :errorMessage="getErrorMessagePassword" />
+
       <b-button variant="success" class="login__form__submit" type="submit">Войти</b-button>
       <router-link to="/register">Зарегистрироваться</router-link>
     </form>
@@ -21,6 +18,7 @@
 
 <script>
 import { required, email, minLength } from "vuelidate/lib/validators";
+import validationError from "./validationError";
 
 export default {
   data() {
@@ -29,28 +27,31 @@ export default {
       password: ""
     };
   },
+  components: {
+    validationError
+  },
   validations: {
     email: { required, email },
     password: { required, minLength: minLength(6) }
   },
   computed: {
-    checkEmail() {
-      if (this.$v.email.$dirty) {
-        if (this.$v.email.email && this.$v.email.required) {
-          return true;
-        }
-        return false;
+    getErrorMessageEmail() {
+      if (this.$v.email.$dirty && !this.$v.email.required) {
+        return "Пустое поле";
+      } else if (this.$v.email.$dirty && !this.$v.email.email) {
+        return "Введите корректный email";
+      } else {
+        return "";
       }
-      return null;
     },
-    checkPassword() {
-      if (this.$v.password.$dirty) {
-        if (this.$v.password.minLength && this.$v.password.required) {
-          return true;
-        }
-        return false;
+    getErrorMessagePassword() {
+      if (this.$v.password.$dirty && !this.$v.password.required) {
+        return "Пустое поле";
+      } else if (this.$v.password.$dirty && !this.$v.password.minLength) {
+        return "Пароль менее 6 символов";
+      } else {
+        return "";
       }
-      return null;
     }
   },
   methods: {

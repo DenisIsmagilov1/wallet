@@ -4,12 +4,11 @@
       <h2>Новый счет</h2>
       <label for="title">Название</label>
       <input v-model="title" id="title" type="text" />
-      <span v-if="($v.title.$dirty && !$v.title.required)" class="error">Пустое поле</span>
+      <validationError :errorMessage="getErrorMessageTitle" />
 
       <label for="balance">Сумма</label>
       <input v-model="balance" id="balance" type="text" />
-      <span v-if="($v.balance.$dirty && !$v.balance.required)" class="error">Пустое поле</span>
-      <span v-if="($v.balance.$dirty && !$v.balance.numeric)" class="error">Введите число</span>
+      <validationError :errorMessage="getErrorMessageBalance" />
 
       <b-button variant="outline-success" type="submit">Добавить</b-button>
     </form>
@@ -19,6 +18,7 @@
 <script>
 import { required, numeric } from "vuelidate/lib/validators";
 import { mapActions } from "vuex";
+import validationError from "./validationError";
 
 export default {
   data() {
@@ -26,6 +26,9 @@ export default {
       title: "",
       balance: ""
     };
+  },
+  components: {
+    validationError
   },
   validations: {
     title: { required },
@@ -50,6 +53,24 @@ export default {
       });
 
       this.title = this.balance = "";
+    }
+  },
+  computed: {
+    getErrorMessageBalance() {
+      if (this.$v.balance.$dirty && !this.$v.balance.required) {
+        return "Пустое поле";
+      } else if (this.$v.balance.$dirty && !this.$v.balance.numeric) {
+        return "Введите число";
+      } else {
+        return "";
+      }
+    },
+    getErrorMessageTitle() {
+      if (this.$v.title.$dirty && !this.$v.title.required) {
+        return "Пустое поле";
+      } else {
+        return "";
+      }
     }
   }
 };
